@@ -1,0 +1,16 @@
+{
+  "name": "soap-test-app",
+  "version": "1.0.0",
+  "description": "Soap testing example. Run client.js and server.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon -e css,ejs,js,json --watch app --ignore feedback.json"
+  },
+  "author": "Jove Trajkoski",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "body-parser-xml": "^1.1.0",
+    "express": "^4.16.2"
+  }
+}
