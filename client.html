@@ -30,8 +30,8 @@
                 if(xmlhttp.readyState == 4)
                 {
                     if(xmlhttp.status == 200){
-                        console.log("Data pushed\n");
-                        alert(xmlhttp.responseText)
+                      console.log("Data pushed\n");
+                      console.log(JSON.parse(xmlhttp.response));
                     }
                 }
             }

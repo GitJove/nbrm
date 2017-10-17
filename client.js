@@ -2,6 +2,8 @@ var express = require('express');
 var soap = require('soap');
 var bodyParser = require('body-parser');
 var app = express();
+var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
 
 require('body-parser-xml')(bodyParser);
 
@@ -21,9 +23,6 @@ app.get('/',function(req,res){
 app.post('/getData',bodyParser.urlencoded({extended:false}),function(req,res){
     /*console.log(req.body);*/
     var input = req.body;
-    console.log(input.nbrmdata.startdate);
-    /*console.log(input.nbrmdata.startDate);
-    console.log(input.nbrmdata.endDate);*/
 
     /* 
     -beginning of soap body
@@ -32,7 +31,7 @@ app.post('/getData',bodyParser.urlencoded({extended:false}),function(req,res){
     */
     var url = "http://localhost:3030/nbrm?wsdl";
 
-    // var args = {StartDate:'12.02.2010', EndDate:'15.02.2010'};
+    /*var args = {StartDate:'12.10.2017', EndDate:'13.10.2017'};*/
     var args = {StartDate:input.nbrmdata.startdate, EndDate:input.nbrmdata.enddate};
     soap.createClient(url,function(err,client){
         if(err)
@@ -40,11 +39,12 @@ app.post('/getData',bodyParser.urlencoded({extended:false}),function(req,res){
         else {
             client.GetExchangeRates(args,function(err,response){
                 if(err) {
-                    /*console.error(err);*/
+                    console.error(err);
                 }
                 else {
-                    /*console.log(response);*/
-                    res.send(response);
+                  parser.parseString(response.GetExchangeRatesResult, function (err, result) {
+                    res.send(result.dsKurs.KursZbir);
+                  });
                 }
             })
         }
