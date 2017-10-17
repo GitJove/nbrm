@@ -18,7 +18,7 @@ app.get('/',function(req,res){
     res.sendFile(__dirname + "/" + "/client.html");
 })
 
-app.post('/getAge',bodyParser.urlencoded({extended:false}),function(req,res){
+app.post('/getData',bodyParser.urlencoded({extended:false}),function(req,res){
     /*console.log(req.body);*/
     var input = req.body;
     console.log(input.nbrmdata.startdate);

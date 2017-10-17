@@ -20,7 +20,7 @@
         function soapify () {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.getAllResponseHeaders();
-            xmlhttp.open('POST','http://127.0.0.1:3036/getAge',true);
+            xmlhttp.open('POST','http://127.0.0.1:3036/getData',true);
              var input = '<?xml version="1.0"?>' +
              '<nbrmdata>' +
                 '<StartDate>'+document.getElementById('startDate').value+'</StartDate>'+
