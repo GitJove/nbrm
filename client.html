@@ -1,28 +1,7 @@
 <html>
     <head>
-        <script type ="text/javascript">
-            function soapify () {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.getAllResponseHeaders();
-                xmlhttp.open('POST','http://127.0.0.1:3036/getAge',true);
-                 var input = '<?xml version="1.0"?>' +
-                 '<nbrmdata>' +
-                    '<StartDate>'+document.getElementById('startDate').value+'</StartDate>'+
-                    '<EndDate>'+document.getElementById('endDate').value +'</EndDate>' +
-                 '</nbrmdata>';
-                xmlhttp.onreadystatechange = function() {
-                    if(xmlhttp.readyState == 4)
-                    {
-                        if(xmlhttp.status == 200){
-                            console.log("Data pushed\n");
-                            alert(xmlhttp.responseText)
-                        }
-                    }
-                }
-                xmlhttp.setRequestHeader('Content-Type','text/xml');
-                xmlhttp.send(input);
-            }
-        </script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
     <body>
         <form>
@@ -31,4 +10,33 @@
             <input type = "button" value = "check" onclick = "soapify()"/>
         </form>
     </body>
+    <script>
+      $( function() {
+        $( "#startDate" ).datepicker({ dateFormat: 'dd.mm.yy' });
+        $( "#endDate" ).datepicker({ dateFormat: 'dd.mm.yy' });
+      } );
+      </script>
+    <script type ="text/javascript">
+        function soapify () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.getAllResponseHeaders();
+            xmlhttp.open('POST','http://127.0.0.1:3036/getAge',true);
+             var input = '<?xml version="1.0"?>' +
+             '<nbrmdata>' +
+                '<StartDate>'+document.getElementById('startDate').value+'</StartDate>'+
+                '<EndDate>'+document.getElementById('endDate').value +'</EndDate>' +
+             '</nbrmdata>';
+            xmlhttp.onreadystatechange = function() {
+                if(xmlhttp.readyState == 4)
+                {
+                    if(xmlhttp.status == 200){
+                        console.log("Data pushed\n");
+                        alert(xmlhttp.responseText)
+                    }
+                }
+            }
+            xmlhttp.setRequestHeader('Content-Type','text/xml');
+            xmlhttp.send(input);
+        }
+    </script>
 </html>

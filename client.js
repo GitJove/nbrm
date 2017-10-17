@@ -19,10 +19,11 @@ app.get('/',function(req,res){
 })
 
 app.post('/getAge',bodyParser.urlencoded({extended:false}),function(req,res){
-    console.log(req.body);
+    /*console.log(req.body);*/
     var input = req.body;
-    console.log(input.nbrmdata.startDate);
-    console.log(input.nbrmdata.endDate);
+    console.log(input.nbrmdata.startdate);
+    /*console.log(input.nbrmdata.startDate);
+    console.log(input.nbrmdata.endDate);*/
 
     /* 
     -beginning of soap body
@@ -31,17 +32,18 @@ app.post('/getAge',bodyParser.urlencoded({extended:false}),function(req,res){
     */
     var url = "http://localhost:3030/nbrm?wsdl";
 
-    var args = {StartDate:'12.02.2010', EndDate:'15.02.2010'};
-    // var args = {StartDate:input.nbrmdata.startDate, EndDate:input.nbrmdata.endDate};
+    // var args = {StartDate:'12.02.2010', EndDate:'15.02.2010'};
+    var args = {StartDate:input.nbrmdata.startdate, EndDate:input.nbrmdata.enddate};
     soap.createClient(url,function(err,client){
         if(err)
             console.error(err);
         else {
             client.GetExchangeRates(args,function(err,response){
-                if(err)
-                    console.error(err);
-                else{
-                    console.log(response);
+                if(err) {
+                    /*console.error(err);*/
+                }
+                else {
+                    /*console.log(response);*/
                     res.send(response);
                 }
             })
